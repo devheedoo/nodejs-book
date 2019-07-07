@@ -1,14 +1,15 @@
 const express = require('express');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 
-router.get('/profile', (req, res) => {
+router.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile', {
     title: 'Profile | NodeBird',
     user: null,
   });
 });
 
-router.get('/join', (req, res) => {
+router.get('/join', isNotLoggedIn, (req, res) => {
   res.render('join', {
     title: 'Join | NodeBird',
     user: null,
