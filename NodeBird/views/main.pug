@@ -11,9 +11,9 @@ block content
             img#img-preview(src='' style='display: none;' width='250' alt='Preview')
             input#img-url(type='hidden' name='url')
           div
-            label#img-label(for='img') Upload Images
+            label#img-label(for='img') Upload an Image
             input#img(type='file' accept='image/*')
-            button#twit-btn.btn(type='submit') Twit
+            button#twit-btn.btn(type='submit') Twit...
     .twits
       form#hashtag-form(action='/post/hashtag')
         input(type='text' name='hashtag' placeholder='Search Tags')
@@ -51,14 +51,14 @@ block content
         xhr.send(formData);
       });
     }
-    [].forEach.call(document.querySelectorAll('.twit-follow').forEach(function (tag) {
+    document.querySelectorAll('.twit-follow').forEach(function (tag) {
       tag.addEventListener('click', function () {
         var isLoggedIn = document.querySelector('#my-id');
         if (isLoggedIn) {
           var userId = tag.parentNode.querySelector('.twit-user-id').value;
           var myId = isLoggedIn.value;
           if (userId !== myId) {
-            if (confirm('Follow?')) {
+            if (confirm('Would you follow him/her?')) {
               var xhr = new XMLHttpRequest();
               xhr.onload = function () {
                 if (xhr.status === 200) {

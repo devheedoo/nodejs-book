@@ -28,7 +28,18 @@ module.exports = (passport) => {
   // passport.session() 미들웨어가 이 메서드를 호출
   // serializeUser에서 세션에 저장했던 아이디를 받아 DB에서 조회 후 req.user에 정보 저장
   passport.deserializeUser((id, done) => {
-    User.findOne({ where: { id } })
+    User.findOne({
+      where: { id },
+      include: [{
+        model: User,
+        attributes: ['id', 'nick'],
+        as: 'Followers',
+      }, {
+        model: User,
+        attributes: ['id', 'nick'],
+        as: 'Followings',
+      }],
+    })
       .then(user => done(null, user))
       .catch(err => done(err));
   });

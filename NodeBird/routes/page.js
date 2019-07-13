@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile', {
     title: 'Profile | NodeBird',
-    user: null,
+    user: req.user,
   });
 });
 
